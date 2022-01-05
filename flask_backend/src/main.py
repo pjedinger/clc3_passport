@@ -9,15 +9,18 @@ basic_auth = BasicAuth(app)
 
 @app.route('/')
 def index():
+    app.logger.info("request received; path: '/'")
     return "passport flask_backend is running!"
 
 
 @app.route('/predict', methods=['POST'])
 @basic_auth.required
 def predict():
+    app.logger.info("request received; path: '/predict'")
     response = {"msg": "ok"}
     return jsonify(response), 200
 
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True, port=8080)
+    app.logger.info('flask app started successfully')
