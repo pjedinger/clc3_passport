@@ -37,7 +37,7 @@ env:
   ECS_SERVICE: clc3-passphoto-service             # set this to your Amazon ECS service name
   ECS_CLUSTER: clc3-passphoto-cluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: .aws/clc3-passphoto-task-revision1.json      # set this to the path to your Amazon ECS task definition file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: clc3-passphoto-backend:latest       # set this to the name of the container in the containerDefinitions section of your task definition
+  CONTAINER_NAME: clc3-passphoto-backend       # set this to the name of the container in the containerDefinitions section of your task definition
 
 jobs:
   deploy:
