@@ -11,7 +11,7 @@ import SwiftUI
 struct CLC_PassportApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PassportIntro()
         }
     }
 }
