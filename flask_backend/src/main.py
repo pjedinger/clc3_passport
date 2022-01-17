@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
 from flask_basicauth import BasicAuth
 import logging
+import tensorflow as tf
+from tensorflow import keras
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -23,6 +25,10 @@ def index():
 def predict():
     logger.info("request received; path: '/predict'")
     response = {"msg": "ok"}
+    new_model = tf.keras.models.load_model('model.hdf5')
+
+    # Check its architecture
+    print(new_model.summary())
     return jsonify(response), 200
 
 
