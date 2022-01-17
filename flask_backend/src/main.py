@@ -33,7 +33,7 @@ def predict():
     image_bytes = base64.b64decode(image_base64)
     image_np = np.frombuffer(image_bytes, dtype=np.uint8)
     img = cv2.imdecode(image_np, cv2.IMREAD_UNCHANGED)
-    img = cv2.resize(img, (100, 150))
+    img = cv2.resize(img, (150, 200))
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     img = tf.keras.applications.vgg16.preprocess_input(img)
     img_array = img_to_array(img)
