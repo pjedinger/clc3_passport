@@ -2,13 +2,12 @@ from flask import Flask, request, jsonify
 from flask_basicauth import BasicAuth
 import logging
 import tensorflow as tf
+from keras_preprocessing.image import img_to_array
 import numpy as np
 import cv2
 import base64
 
 # Setup logging
-from keras_preprocessing.image import img_to_array
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
@@ -44,11 +43,12 @@ def predict():
     model = tf.keras.models.load_model('model.hdf5')
 
     prediction = model.predict(img_array)
+    print(prediction)
 
     best_index = np.argmax(prediction)
-    mapping = ["0", "135", "180", "45", "90"]
+    mappings = ["-15", "-30", "-45", "-60", "-75", "-90", "0", "15", "30", "45", "60", "75", "90"]
 
-    response = {"prediction": mapping[best_index]}
+    response = {"prediction": mappings[best_index]}
     return jsonify(response), 200
 
 
