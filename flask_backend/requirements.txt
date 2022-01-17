@@ -1,6 +1,4 @@
 Flask==2.0.2
 Flask-BasicAuth==0.2.0
 tensorflow==2.7.0
-Keras-Preprocessing==1.1.2
-numpy==1.21.4
 opencv-python==4.5.1.48
