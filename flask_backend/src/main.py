@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_basicauth import BasicAuth
 import logging
 import tensorflow as tf
-from keras_preprocessing.image import img_to_array
 import numpy as np
 import cv2
 import base64
@@ -35,15 +34,13 @@ def predict():
     img = cv2.imdecode(image_np, cv2.IMREAD_UNCHANGED)
     img = cv2.resize(img, (150, 200))
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    img = tf.keras.applications.vgg16.preprocess_input(img)
-    img_array = img_to_array(img)
-    img_array = img_array.reshape((1, img_array.shape[0], img_array.shape[1], img_array.shape[2]))
+    img_array = tf.keras.preprocessing.image.img_to_array(img)
+    img_array = img_array.reshape((1, img_array.shape[1], img_array.shape[0], img_array.shape[2]))
 
     # with tf.device('/cpu:0'):
     model = tf.keras.models.load_model('model.hdf5')
 
     prediction = model.predict(img_array)
-    print(prediction)
 
     best_index = np.argmax(prediction)
     mappings = ["-15", "-30", "-45", "-60", "-75", "-90", "0", "15", "30", "45", "60", "75", "90"]

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PassportIntro: View {
+    @State var isActive : Bool = false
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 50.0) {
@@ -24,9 +25,10 @@ struct PassportIntro: View {
 
                 Spacer()
 
-                NavigationLink(destination: ImageSelection()) {
+                NavigationLink(destination: ImageSelection(rootIsActive: self.$isActive), isActive: self.$isActive) {
                     Text("Start image validation").font(.headline)
-                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50).background(Color.blue).foregroundColor(.white).cornerRadius(20).padding(.horizontal).contentShape(RoundedRectangle(cornerRadius: 20))
+                }.isDetailLink(false).frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50).background(Color.blue).foregroundColor(.white).cornerRadius(20).padding(.horizontal).contentShape(RoundedRectangle(cornerRadius: 20))
+                    .navigationBarBackButtonHidden(true)
 
                 Spacer()
                 HStack {
